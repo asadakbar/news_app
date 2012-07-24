@@ -8,3 +8,7 @@
     <%= f.submit "Submit" %>
   </p>
 <% end %>
+
+<% if flash[:message]%>
+  <p class="notice"><%= flash[:message] %></p>
+<% end %>

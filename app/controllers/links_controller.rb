@@ -18,8 +18,16 @@ class LinksController < ApplicationController
   end
 
   def create
-    @link = Link.create(:url => params[:link][:url])
-    redirect_to root_path
+    url = params[:link][:url].strip
+    @link = Link.new(:url => url)
+    if @link.valid?
+      @link.save
+      redirect_to root_path
+    else
+      redirect_to :back
+      flash[:message] =  @link.errors[:url]
+
+    end
   end
 
   def update
