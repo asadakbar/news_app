@@ -1,4 +1,6 @@
 HnClone::Application.routes.draw do
+  devise_for :users
+
   match '/submit' => 'links#new'
   resources :links
 
