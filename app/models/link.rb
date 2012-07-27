@@ -16,4 +16,13 @@ class Link < ActiveRecord::Base
       self.url.insert(0, 'http://')
     end
   end
+
+  def can_be_voted_on_by?(user)
+    user.id != self.user_id && voted_on_by?(user)
+  end
+
+  def voted_on_by?(user)
+    self.votes.select {|vote| vote.user_id == user.id}.empty?
+  end
+
 end

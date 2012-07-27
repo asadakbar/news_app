@@ -1,4 +1,5 @@
 class LinksController < ApplicationController
+  before_filter :current_user_check, :except => [:index]
 
   def index
     @links = Link.scoped.page(params[:page]).per(20)
