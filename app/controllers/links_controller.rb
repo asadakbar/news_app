@@ -42,7 +42,7 @@ class LinksController < ApplicationController
   def update
 
     @link = Link.find(params[:id])
-    if @link.updated_at + 1.minutes >= Time.now
+    if @link.updated_at + 15.minutes >= Time.now
       if @link.update_attributes(params[:link])
       redirect_to root_path
       else
