@@ -1,15 +1,4 @@
 <h1>Submit your link</h1>
-<%= form_for Link.new do |f| %>
-  <p>
-    <%= f.label :url, "Your url"  %>
-    <%= f.text_field :url %>
-  </p>
-  <p>
-    <%= f.submit "Submit" %>
-  </p>
-<% end %>
 
-<% if flash[:message]%>
-  <p class="notice"><%= flash[:message] %></p>
-<% end %>
+<%= render "link_form"%>
 

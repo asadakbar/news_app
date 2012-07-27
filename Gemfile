@@ -7,6 +7,7 @@ gem 'rails', '3.2.6'
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'quiet_assets'
 end
 
 group :production do
@@ -32,6 +33,8 @@ gem "twitter-bootstrap-rails"
 gem 'kaminari'
 
 gem 'devise'
+
+gem 'activerecord-reputation-system', :require => 'reputation_system'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

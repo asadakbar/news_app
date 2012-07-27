@@ -1,7 +1,7 @@
 class LinksController < ApplicationController
 
   def index
-    @links = Link.scoped.page(params[:page]).per(5)
+    @links = Link.scoped.page(params[:page]).per(20)
   end
 
   def show
@@ -12,9 +12,11 @@ class LinksController < ApplicationController
   end
 
   def new
+    @link = Link.new
   end
 
   def edit
+    @link = Link.find(params[:id])
   end
 
   def create
@@ -23,19 +25,32 @@ class LinksController < ApplicationController
       @user = current_user
       user_id = @user.id
     end
-      url = params[:link][:url].strip
-      @link = Link.new(:url => url, :user_id => user_id)
+      # url = params[:link][:url].strip
+      @link = Link.new(params[:link])
       if @link.valid?
         @link.save
         redirect_to root_path
       else
-        redirect_to :back
-        flash[:message] =  @link.errors[:url]
+        render :new
+        # flash[:message] =  @link.errors[:url]
+        # @link = @bad_link
 
       end
     # end
   end
 
   def update
+
+    @link = Link.find(params[:id])
+    if @link.updated_at + 1.minutes >= Time.now
+      if @link.update_attributes(params[:link])
+      redirect_to root_path
+      else
+       render "edit"
+      end
+    else
+      redirect_to root_path, :notice => "Your time to edit a link is 15 minutes, which has currently passed."
+    end
+
   end
 end

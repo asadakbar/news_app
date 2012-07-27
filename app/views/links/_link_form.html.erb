@@ -1,0 +1,27 @@
+<%= form_for @link do |f| %>
+<% if @link.errors.any? %>
+    <div id="error_explanation", class="alert alert-error">
+      <h2><%= pluralize(@link.errors.count, "error") %> prohibited this submit from being saved:</h2>
+      <ul>
+      <% @link.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.hidden_field :user_id, value: current_user.id  %>
+  <p>
+    <%= f.label :title, "Your title"  %>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :url, "Your url"  %>
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.submit "Submit" %>
+  </p>
+
+
+
+<% end %>

@@ -1,7 +1,23 @@
 <h1>List of links:</h1>
-<%@links.each do |link|%>
-</br>
-<a href=<%=link.url%>><%=link.url%></a>
 
+<table class="table table-striped">
+  <tbody>
+<%@links.each do |link|%>
+
+    <tr>
+      <td><%= link_to link.title,  link.url %></td>
+      <%if user_signed_in?%>
+        <%if current_user.id == link.user_id%>
+          <td><i class="icon-edit"></i><%= link_to "edit", "/links/#{link.id}/edit" %></td>
+          <%else%>
+          <td></td>
+        <%end%>
+      <%end%>
+    </tr>
 <%end%>
+ </tbody>
+</table>
+
 <%= paginate @links %>
+
+
