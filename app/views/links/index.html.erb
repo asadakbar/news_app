@@ -5,6 +5,14 @@
 <%@links.each do |link|%>
 
     <tr>
+      <%if user_signed_in?%>
+        <%if link.votes.select {|vote| vote.user_id == current_user.id}.empty? %>
+          <td><a href=<%= votes_create_path(:link_id => link.id) %>><i class="icon-thumbs-up"></i></a></td>
+        <%else %>
+        <td></td>
+        <% end %>
+      <%end%>
+
       <td><%= link_to link.title,  link.url %></td>
       <%if user_signed_in?%>
         <%if current_user.id == link.user_id%>
