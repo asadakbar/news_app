@@ -1,6 +1,6 @@
 class Link < ActiveRecord::Base
 
-  attr_accessible :url, :user_id, :title
+  attr_accessible :url, :user_id, :title, :vote_total
   before_validation :strip_white_spaces
   validates :url, :uniqueness => true
   belongs_to :user
